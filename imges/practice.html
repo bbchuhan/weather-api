@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather app</title>
+</head>
+
+<body>
+    <style>
+        #card{
+            padding: 10px;
+            background-color: rgb(229, 255, 0);
+            background-color: red;
+            display: none;
+        }
+    </style>
+
+    
+    <form>
+        <input type="text" id="userInput">
+        <input type="submit">
+    </form>
+
+    <p id="card"></p>
+
+
+    <script>
+
+        // https://api.openweathermap.org/data/2.5/weather?q=${userInput}&appid=${api}&units=metric
+
+
+        let api = '094b1cddc40a67c426c17b4f56de2b4d';
+
+
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+
+            let userInput = document.getElementById('userInput').value;
+
+            console.log(userInput)
+
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${userInput}&appid=${api}&units=metric`)
+                .then((res) => res.json())
+                .then((data) => {
+
+
+                    let card = document.getElementById('card');
+
+                    card.style.display = 'block';
+
+                    card.innerText = data.main.temp;
+                });
+
+
+        })
+
+
+    </script>
+</body>
+
+</html>
